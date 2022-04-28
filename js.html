@@ -1,8 +1,4 @@
 ><script>
-
-    const NOTIFICACION_OK = 1;
-    const NOTIFICACION_DANGER = 2;
-    const NOTIFICACION_WARNING = 3;  
     
     function crearTablaContactos()
     {
@@ -57,51 +53,68 @@
         document.getElementById('divContactos').appendChild(tabla);
 
         //mostrar notificaion de ok
-        crearNotificacion(NOTIFICACION_OK, 'Contactos obtenidos correctamente', 'todo en orden');
+        crearNotificacionOK( 'Contactos obtenidos correctamente', 'todo en orden');
     }
 
     function crearTablaContactosError()
     {
         //mostrar notificacion de error
-        crearNotificacion(NOTIFICACION_DANGER, 'No se han podido leer los contactos', 'ERROR');
+        crearNotificacionError( 'No se han podido leer los contactos', 'ERROR');
     }
 
-    function crearNotificacion(tipo, mensaje, titulo)
+    function crearNotificacion(mensaje, titulo) 
     {
-        //obtener los datos de notificación
-        let mensajeNotificacion = document.getElementById('mensajeNotificacion');
-        let tituloNotificacion = document.getElementById('tituloNotificacion');
-        let elementoNotificacion = document.getElementById('notificacion');
+        document.getElementById('mensajeNotificacion').textContent = mensaje;
+        document.getElementById('tituloNotificacion').textContent = titulo;
         let iconoNotificacion = document.getElementById('iconoNotificacion');
-        let notificacion = bootstrap.Toast.getOrCreateInstance(elementoNotificacion);
-
-        //editar notificacion
-        mensajeNotificacion.textContent = mensaje;
-        tituloNotificacion.textContent = titulo;
-
-        switch(tipo)
-        {
-            case NOTIFICACION_OK: 
-            iconoNotificacion.className = '';
-            iconoNotificacion.classList.add('bi', 'bi-check2-square');
-            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-verde-oscuro');
-            break;
-
-            case NOTIFICACION_DANGER:
-            iconoNotificacion.className = '';
-            iconoNotificacion.classList.add('bi', 'bi-bug');
-            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-rojo-oscuro');
-            break;
-
-            case NOTIFICACION_WARNING:
-            iconoNotificacion.className = '';
-            iconoNotificacion.classList.add('bi', 'bi-exclamation-square');
-            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-amarillo-oscuro');
-            break;
-        }
-
-        //mostrar notificacion
-        notificacion.show();
+        bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
     }
+
+    function crearNotificacionOK(mensaje, titulo)
+    {
+        crearNotificacion(mensaje,titulo);
+        crearIconoNotificacionOK();
+        crearColorNorificacion('--color-verde-oscuro');
+    }
+
+    function crearNotificacionError(mensaje, titulo)
+    {
+        crearNotificacion(mensaje,titulo);
+        crearIconoNotificacionError();
+        crearColorNorificacion('--color-rojo-oscuro');
+    }
+
+    function crearNotificacionAdvertencia(mensaje, titulo)
+    {
+        crearNotificacion(mensaje,titulo);
+        crearIconoNotificacionAdvertencia();
+        crearColorNorificacion('--color-amarillo-oscuro');
+    }
+
+    function crearIconoNotificacionOK()
+    {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-bug');
+    }
+
+    function crearIconoNotificacionError()
+    {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-check2-square');
+    }
+
+    function crearIconoNotificacionAdvertencia()
+    {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-exclamation-square');
+    }
+
+    function crearColorNorificacion(color)
+    {
+        let elementoNotificacion = document.getElementById('notificacion');
+        elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
+    }
+
+
 
 </script>
