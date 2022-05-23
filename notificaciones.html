@@ -1,0 +1,119 @@
+<script>
+    //
+    //NOTIFICACIONES
+    //
+    const ICONO_CHECK = 'bi-check2-square';
+    const ICONO_PAPELERA = 'bi-trash';
+    const ICONO_CONTACTO = 'bi-person-plus-fill';
+    const ICONO_ERROR = 'bi-bug';
+    const ICONO_ADVERTECIA = 'bi-exclamation-square';
+
+    const LOTTIE_CHECK = 'https://assets3.lottiefiles.com/private_files/lf30_dfspihm8.json';
+    const LOTTIE_PAPELERA = 'https://assets3.lottiefiles.com/packages/lf20_2ntmkuwt.json'
+    const LOTTIE_CONTACTO = 'https://assets7.lottiefiles.com/packages/lf20_ygvu4b4g.json'
+    const LOTTIE_ERROR = 'https://assets1.lottiefiles.com/packages/lf20_qw8ewk7k.json'
+    const LOTTIE_PELIGRO = 'https://assets4.lottiefiles.com/packages/lf20_Tkwjw8.json'
+
+    function crearNotificacionOK(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, LOTTIE_CHECK, '--color-verde-oscuro');
+    }
+
+    function crearNotificacionError(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, LOTTIE_ERROR, '--color-rojo-oscuro');
+    }
+
+    function crearNotificacionContacto(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, LOTTIE_CONTACTO, '--color-azul-oscuro');
+    }
+
+    function crearNotificacionAdvertencia(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, LOTTIE_ADVERTECIA, '--color-amarillo-oscuro');
+    }
+
+    function crearNotificacionBorrar(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, LOTTIE_PAPELERA, '--color-gris-oscuro');
+    }
+
+    function crearNotificacion(titulo, mensaje, lottie, color) {
+        let notificacion = crearAtributosNotificacion();
+        let cabeceraNotificacion = crearCabeceraNotificacion(titulo, lottie);
+        let cuerpoNotificacion = crearCuerpoNotificacion(mensaje);
+
+        //agregar cabecera y cuerpo
+        notificacion.appendChild(cabeceraNotificacion);
+        notificacion.appendChild(cuerpoNotificacion);
+
+        //establecer color
+        notificacion.style.backgroundColor = getComputedStyle(document.documentElement)
+        .getPropertyValue(color);
+
+        //evento
+        notificacion.addEventListener('hidden.bs.toast', function ()  {
+        this.remove();
+        });
+
+        //agregamos al contenedor de notificaciones
+        document.getElementById('contenedorCalificaciones').appendChild(notificacion);
+
+        //instancia mostrar
+        bootstrap.Toast.getOrCreateInstance(notificacion).show();
+    }
+
+    function crearCuerpoNotificacion(mensaje) { 
+        let cuerpoNotificacion = document.createElement('div');
+        cuerpoNotificacion.classList.add('toast-body');
+        cuerpoNotificacion.textContent = mensaje;
+        return cuerpoNotificacion;
+    }
+
+    function crearCabeceraNotificacion(titulo, lottie) {
+        //crear cabecera
+        let cabeceraNotificacion = document.createElement('div');
+        cabeceraNotificacion.classList.add('toast-header', 'p-0');
+
+        //creamos el lottie pasamos el contenedor
+        crearLottieNotificacion(cabeceraNotificacion,lottie);
+
+        //crear el titulo
+        let tituloNotificacion = document.createElement('strong');
+        tituloNotificacion.classList.add('mx-2');
+        tituloNotificacion.textContent = titulo;
+
+        cabeceraNotificacion.appendChild(tituloNotificacion);
+        return cabeceraNotificacion;
+    }
+
+    function crearIconoNotificacion(contenedor, icono) {
+        let divIcono = document.createElement('div');
+        let iconoNotificacion = document.createElement('i');
+        divIcono.classList.add('icono-notificacion');
+        iconoNotificacion.classList.add('bi', icono);
+        divIcono.appendChild(iconoNotificacion);
+        contenedor.appendChild(divIcono);
+    }
+
+    function crearLottieNotificacion(contenedor, lottie) {
+        let divIcono = document.createElement('div');
+        let iconoNotificacion = document.createElement('lottie-player');
+
+        //establecer los atributos
+        iconoNotificacion.setAttribute('src', lottie);
+        iconoNotificacion.setAttribute('backgrpund', 'transparent');
+        iconoNotificacion.setAttribute('speed', '1');
+        iconoNotificacion.style.width = '3rem';
+        iconoNotificacion.style.height = '3rem';
+        iconoNotificacion.autoplay = true;
+
+        divIcono.appendChild(iconoNotificacion);
+        contenedor.appendChild(divIcono);
+    }
+
+    function crearAtributosNotificacion() {
+        let notificacion = document.createElement('div');
+        notificacion.classList.add('toast', 'align-items-center', 'text-white', 'border-0');
+        notificacion.setAttribute('role','alert');
+        notificacion.setAttribute('aria-live','assertive');
+        notificacion.setAttribute('aria-atomic','true');
+        return notificacion;
+    }
+</script>

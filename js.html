@@ -1,4 +1,3 @@
->
 <script>
     function insertarContacto() {
         //obtener datos
@@ -106,9 +105,6 @@
         table.classList.add('table', 'table-striped', 'border', 'border-4', 'border-dark');
         //agregamos tabla a la pagina
         document.getElementById('divContactos').appendChild(tabla);
-
-        //mostrar notificaion de ok
-        crearNotificacionOK('Contactos obtenidos correctamente', 'todo en orden');
 
         //eliminaremos el loader
         eliminarLoader();
@@ -304,99 +300,29 @@
         if (tabla) tabla.remove();
     }
 
-    //
-    //NOTIFICACIONES
-    //
-    const ICONO_CHECK = 'bi-check2-square';
-    const ICONO_PAPELERA = 'bi-trash';
-    const ICONO_CONTACTO = 'bi-person-plus-fill';
-    const ICONO_ERROR = 'bi-bug';
-    const ICONO_ADVERTECIA = 'bi-exclamation-square';
+    function importarContactos() {
+        //borramos la tabla si existe
+        eliminarTabla();
 
-    function crearNotificacionOK(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_CHECK, '--color-verde-oscuro');
+        //crear loader
+        crearLoaderPuntos('divContactos');
+
+        google.script.run
+            .withSuccessHandler(contactosImportadosCorrectamente)
+            .withFailureHandler(contactosImportadosError)
+            .importarContactos();
     }
 
-    function crearNotificacionError(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_ERROR, '--color-rojo-oscuro');
+    function contactosImportadosCorrectamente() {
+        //mostrar notificación
+        crearNotificacionOK('Se han agregado los contactos correctamente', 'OK');
+        eliminarLoader();
+        crearTablaContactos();
     }
 
-    function crearNotificacionContacto(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_CONTACTO, '--color-azul-oscuro');
-    }
-
-    function crearNotificacionAdvertencia(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_ADVERTECIA, '--color-amarillo-oscuro');
-    }
-
-    function crearNotificacionBorrar(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_PAPELERA, '--color-gris-oscuro');
-    }
-
-    function crearNotificacion(titulo, mensaje, icono, color) {
-        let notificacion = crearAtributosNotificacion();
-        let cabeceraNotificacion = crearCabeceraNotificacion(titulo, icono);
-        let cuerpoNotificacion = crearCuerpoNotificacion(mensaje);
-
-        //agregar cabecera y cuerpo
-        notificacion.appendChild(cabeceraNotificacion);
-        notificacion.appendChild(cuerpoNotificacion);
-
-        //establecer color
-        notificacion.style.backgroundColor = getComputedStyle(document.documentElement)
-        .getPropertyValue(color);
-
-        //evento
-        notificacion.addEventListener('hidden.bs.toast', function ()  {
-        this.remove();
-        });
-
-        //agregamos al contenedor de notificaciones
-        document.getElementById('contenedorCalificaciones').appendChild(notificacion);
-
-        //instancia mostrar
-        bootstrap.Toast.getOrCreateInstance(notificacion).show();
-    }
-
-    function crearCuerpoNotificacion(mensaje) { 
-        let cuerpoNotificacion = document.createElement('div');
-        cuerpoNotificacion.classList.add('toast-body');
-        cuerpoNotificacion.textContent = mensaje;
-        return cuerpoNotificacion;
-    }
-
-    function crearCabeceraNotificacion(titulo, icono) {
-        //crear cabecera
-        let cabeceraNotificacion = document.createElement('div');
-        cabeceraNotificacion.classList.add('toast-header', 'p-0');
-
-        //creamos el icono pasamos el contenedor
-        crearIconoNotificacion(cabeceraNotificacion,icono);
-
-        //crear el titulo
-        let tituloNotificacion = document.createElement('strong');
-        tituloNotificacion.classList.add('mx-2');
-        tituloNotificacion.textContent = titulo;
-
-        cabeceraNotificacion.appendChild(tituloNotificacion);
-        return cabeceraNotificacion;
-    }
-
-    function crearIconoNotificacion(contenedor, icono) {
-        let divIcono = document.createElement('div');
-        let iconoNotificacion = document.createElement('i');
-        divIcono.classList.add('icono-notificacion');
-        iconoNotificacion.classList.add('bi', icono);
-        divIcono.appendChild(iconoNotificacion);
-        contenedor.appendChild(divIcono);
-    }
-
-    function crearAtributosNotificacion() {
-        let notificacion = document.createElement('div');
-        notificacion.classList.add('toast', 'align-items-center', 'text-white', 'border-0');
-        notificacion.setAttribute('role','alert');
-        notificacion.setAttribute('aria-live','assertive');
-        notificacion.setAttribute('aria-atomic','true');
-        return notificacion;
+    function contactosImportadosError() {
+        crearNotificacionContacto('No se ha podido importar los contactos', 'ERROR');
+        eliminarLoader();
+        crearTablaContactos();
     }
 </script>
