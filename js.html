@@ -87,10 +87,21 @@
         //body de la tabla
         for (let i = 1; i < obj.length; i++) {
             let fila = document.createElement('tr');
+
             for (let j = 0; j < obj[i].length; j++) {
                 let celda = document.createElement('td');
                 celda.textContent = obj[i][j];
                 fila.appendChild(celda);
+
+                //si es el quinto elemento
+                if(j == 4) {
+                    //creamos la imagen
+                    celda.textContent = '';
+                    let imagen = document.createElement('img');
+                    imagen.classList.add('img-fluid', 'rounded');
+                    imagen.src = obj[i][j];
+                    celda.appendChild(imagen);
+                }
             }
             //agregar los botones a la fila
             fila.appendChild(crearCeldaBotones(i + 1, obj[i]));
