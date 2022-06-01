@@ -45,11 +45,11 @@
 
         //establecer color
         notificacion.style.backgroundColor = getComputedStyle(document.documentElement)
-        .getPropertyValue(color);
+            .getPropertyValue(color);
 
         //evento
-        notificacion.addEventListener('hidden.bs.toast', function ()  {
-        this.remove();
+        notificacion.addEventListener('hidden.bs.toast', function () {
+            this.remove();
         });
 
         //agregamos al contenedor de notificaciones
@@ -59,7 +59,7 @@
         bootstrap.Toast.getOrCreateInstance(notificacion).show();
     }
 
-    function crearCuerpoNotificacion(mensaje) { 
+    function crearCuerpoNotificacion(mensaje) {
         let cuerpoNotificacion = document.createElement('div');
         cuerpoNotificacion.classList.add('toast-body');
         cuerpoNotificacion.textContent = mensaje;
@@ -72,7 +72,7 @@
         cabeceraNotificacion.classList.add('toast-header', 'p-0');
 
         //creamos el lottie pasamos el contenedor
-        crearLottieNotificacion(cabeceraNotificacion,lottie);
+        crearLottieNotificacion(cabeceraNotificacion, lottie);
 
         //crear el titulo
         let tituloNotificacion = document.createElement('strong');
@@ -111,9 +111,9 @@
     function crearAtributosNotificacion() {
         let notificacion = document.createElement('div');
         notificacion.classList.add('toast', 'align-items-center', 'text-white', 'border-0');
-        notificacion.setAttribute('role','alert');
-        notificacion.setAttribute('aria-live','assertive');
-        notificacion.setAttribute('aria-atomic','true');
+        notificacion.setAttribute('role', 'alert');
+        notificacion.setAttribute('aria-live', 'assertive');
+        notificacion.setAttribute('aria-atomic', 'true');
         return notificacion;
     }
 </script>

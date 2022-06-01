@@ -2,7 +2,8 @@
     <!--Botnes superiores-->
     <div class="d-flex justify-content-center my-3">
         <button type="button" class="btn btn-success m-2" onclick="crearTarjetasContactos()"> Mostrar contactos</button>
-        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"> Mostrar contactos Tabla</button>
+        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"> Mostrar contactos
+            Tabla</button>
         <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">Crear contacto</button>
         <button type="button" class="btn btn-warning m-2" onclick="importarContactos()"> + 5</button>
     </div>
@@ -30,26 +31,29 @@
                 <!--Formulario crear contacto-->
                 <form onsubmit="insertarContacto()" method="dialog" id="formulario">
                     <div class="modal-body">
-                       <!--Nombre y apellidos--> 
+                        <!--Nombre y apellidos-->
                         <div class="row mb-3">
-                        <div class="col-4">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]" title="El nombre no puede contener numeros" required>
+                            <div class="col-4">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]"
+                                    title="El nombre no puede contener numeros" required>
+                            </div>
+                            <div class="col-8">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" name="apellidos" id="apellidos"
+                                    pattern="[^0-9]*" title="El nombre no puede contener numeros" required>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" name="apellidos" id="apellidos" pattern="[^0-9]*" title="El nombre no puede contener numeros" required>
-                        </div>
-                    </div>
-                   <!--Correo y telefono--> 
+                        <!--Correo y telefono-->
                         <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
                             <input type="email" class="form-control me-4" id="correo" required>
                             <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                            <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{9,11}" title="El telfono debe contener entre 9 y 11 digitos numericos" required>
+                            <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{9,11}"
+                                title="El telfono debe contener entre 9 y 11 digitos numericos" required>
                         </div>
                     </div>
-\
+                    \
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear contacto</button>
