@@ -1,4 +1,7 @@
 <script>
+
+    const IMAGEN_PERFIL_INICIO = 'https://drive.google.com/uc?export=view&id=1OpXPmqSHsVFEa_VGRAzF3PHgvCqSbwp3';
+
     function abrirModalCrearContacto() {
 
         //boton crear
@@ -18,6 +21,8 @@
         document.getElementById('apellidos').value = '';
         document.getElementById('correo').value = '';
         document.getElementById('telf').value = '';
+        document.getElementById('imagen').value = '';
+        document.getElementById('imgForm').src = IMAGEN_PERFIL_INICIO;
 
         //abrir modal
         bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
