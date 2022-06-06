@@ -1,8 +1,10 @@
 <script>
 
-    function extraerContactos(datos) {
+    function extraerContactos(datos)
+    {
         let contactos = [];
-        for (let i = 1; i < datos.length; i++) {
+        for(let i = 1; i<datos.length; i++)
+        {
             let contacto =
             {
                 nombre: datos[i][0],
@@ -10,27 +12,32 @@
                 correo: datos[i][2],
                 telf: datos[i][3],
                 imagen: datos[i][4],
-                fila: i + 1
+                fila: i+1
             };
             contactos.push(contacto);
         }
         return contactos;
     }
 
-    function extraerColumnas(datos) {
+    function extraerColumnas(datos)
+    {
         let columnas = [];
-        for (let i = 0; i < datos[0].length; i++) {
+        for(let i = 0; i<datos[0].length; i++)
+        {
             columnas.push(datos[0][i]);
         }
         columnas.push('OPCIONES');
         return columnas;
     }
 
-    function eliminarTabla() {
+    function eliminarTabla()
+    {
         let tabla = document.getElementById('tablaContactos');
         if (tabla) tabla.remove();
     }
-    function crearTablaContactos() {
+
+    function crearTablaContactos()
+    {
         limpiar();
 
         google.script.run
@@ -39,64 +46,69 @@
             .obtenerDatos();
     }
 
-    function crearTablaContactosError() {
-        //Mostrar notificaciones de error
+    function crearTablaContactosError()
+    {
+        //mostrar notificación de error
         crearNotificacionError('No se han podido leer los contactos', 'ERROR');
 
-        //eliminar el loader
+        //eliminaremos el loader
         eliminarLoader();
     }
 
-    function crearTablaContactosCorrectamente(datos) {
-
-        //extraer los contactos y las columnas 
+    function crearTablaContactosCorrectamente(datos)
+    {
+        //extraer contactos y columnas
         let contactos = extraerContactos(datos);
-        let columna = extraerColumnas(datos);
+        let columnas = extraerColumnas(datos);
 
-        //creamos la tabla
+        //crearemos la tabla
         tabla = document.createElement('table');
         tabla.id = 'tablaContactos';
 
-        //creamos la cabecera y agregamos a tabla
+        //creamos la cabecera y agregar a tabla
         tabla.appendChild(crearHeaderTabla(columnas));
 
-        //creamos cuerpo y agregamos a tabla
+        //crear cuerpo y agregar a tabla
         tabla.appendChild(crearBodyTabla(contactos));
 
         //estilo de la tabla
-        table.classList.add('table', 'table-striped', 'border', 'border-4', 'border-dark');  
-        
-        //agregamos tabla a la pagina
+        tabla.classList.add('table', 'table-striped', 'border', 'border-4', 'border-dark');
+                
+        //agregamos tabla a la página
         document.getElementById('divContactos').appendChild(tabla);
 
         //eliminaremos el loader
         eliminarLoader();
     }
 
-    function crearHeaderTabla(columnas) {
-        let tablaHeader = document.createElement('thead');
+    function crearHeaderTabla(columnas)
+    {
+        let tablaHeader = document.createElement('thead');        
         tablaHeader.classList.add('table-dark');
-
+        
         //creamos fila del header de la tabla
         let primeraFila = document.createElement('tr');
 
         //agregamos columnas
-        columnas.forEach(columna => {
+        columnas.forEach(columna =>
+        {
             let celda = document.createElement('td');
             celda.textContent = columna;
-            primeraFila.appendChild(celda);
+            primeraFila.appendChild(celda);            
         });
 
-        //agregamos fila al header
+        //agegamos fila al header
         tablaHeader.appendChild(primeraFila);
 
         return tablaHeader;
     }
 
-    function crearBodyTabla(contactos) {
+    function crearBodyTabla(contactos)
+    {
         let tablaBody = document.createElement('tbody');
 
-        contactos.forEach(contactos => {
+        contactos.forEach(contacto =>
+        {
             let fila = document.createElement('tr');
 
             //agregamos las celdas
@@ -108,29 +120,32 @@
             fila.appendChild(crearCeldaBotones(contacto));
 
             //agregamos la fila
-            tablaBody.appendChild(fila);
-        });
+            tablaBody.appendChild(fila);  
 
+        });
         return tablaBody;
     }
 
-    function crearCelda(dato) {
+    function crearCelda(dato)
+    {
         let celda = document.createElement('td');
         celda.textContent = dato;
         return celda;
     }
 
-    function crearCeldaImagen(rutaImagen) {
+    function crearCeldaImagen(rutaImagen)
+    {
         let celda = document.createElement('td');
         let imagen = document.createElement('img');
-        imagen.classList.add('img-fluid', 'rounded', 'img-tabla');
+        imagen.classList.add('img-fluid', 'rounded','img-tabla');
         imagen.src = rutaImagen;
-        celda.appendChild(imagen);
+        celda.appendChild(imagen);   
 
         return celda;
     }
 
-    function crearCeldaBotones(contacto) {
+    function crearCeldaBotones(contacto)
+    {
         //crear celda
         let celda = document.createElement('td');
         celda.classList.add('text-center');

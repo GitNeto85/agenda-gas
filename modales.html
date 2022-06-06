@@ -1,12 +1,12 @@
 <script>
 
-    const IMAGEN_PERFIL_INICIO = 'https://drive.google.com/uc?export=view&id=1OpXPmqSHsVFEa_VGRAzF3PHgvCqSbwp3';
+    const IMAGEN_PERFIL_INICIO = 'https://drive.google.com/uc?export=view&id=1ibC-wswzMumt9cxTQIpjazT803G0ZOZv';
 
-    function abrirModalCrearContacto() {
-
+    function abrirModalCrearContacto()
+    {
         //boton crear
         let boton = document.getElementById('botonCrearModificar');
-        boton.textContent = "Crear contacto";
+        boton.textContent = 'Crear contacto';
         boton.classList = '';
         boton.classList.add('btn', 'btn-success');
 
@@ -16,7 +16,7 @@
         //modificar submit
         document.getElementById('formulario').onsubmit = () => insertarContacto();
 
-        //Obtener datos
+        //obtener datos
         document.getElementById('nombre').value = '';
         document.getElementById('apellidos').value = '';
         document.getElementById('correo').value = '';
@@ -28,11 +28,11 @@
         bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
     }
 
-    function abrirModalModificarContacto(contacto) {
-
+    function abrirModalModificarContacto(contacto)
+    {
         //boton modificar
         let boton = document.getElementById('botonCrearModificar');
-        boton.textContent = "Modificar contacto";
+        boton.textContent = 'Modificar contacto';
         boton.classList = '';
         boton.classList.add('btn', 'btn-warning');
 
@@ -42,16 +42,29 @@
         //modificar submit
         document.getElementById('formulario').onsubmit = () => modificarContacto(contacto.fila);
 
-        //Obtener datos
+        //obtener datos
         document.getElementById('nombre').value = contacto.nombre;
         document.getElementById('apellidos').value = contacto.apellidos;
         document.getElementById('correo').value = contacto.correo;
         document.getElementById('telf').value = contacto.telf;
         document.getElementById('imgForm').src = contacto.imagen;
         document.getElementById('imagen').value = '';
-       
+
         //abrir modal
         bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
-
     }
+
+    function abrirModalInfoContacto(contacto)
+    {
+        //obtener datos
+        document.getElementById('nombreInfoContacto').textContent = contacto.nombre+' '+contacto.apellidos;
+        document.getElementById('correoInfoContacto').textContent = contacto.correo;
+        document.getElementById('telfInfoContacto').textContent = contacto.telf;
+        document.getElementById('imgInfoContacto').src = contacto.imagen;
+
+        //abrir modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('infoContactoModal')).show();
+    }
+
+
 </script>

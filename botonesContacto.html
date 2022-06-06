@@ -1,11 +1,12 @@
 <script>
-    function crearBotonInfoContacto(contacto) {
 
+    function crearBotonInfoContacto(contacto)
+    {
         //boton info
         let botonInfo = document.createElement('button');
         botonInfo.id = 'botonInfo' + contacto.fila;
         botonInfo.classList.add('btn', 'btn-success', 'm-1');
-        botonInfo.onclick = () => mostrarInformacionAdicionalContacto(contacto);
+        botonInfo.onclick = () => abrirModalInfoContacto(contacto);
 
         //icono
         let iconoInfo = document.createElement('i');
@@ -15,8 +16,8 @@
         return botonInfo;
     }
 
-    function crearBotonBorrarContacto(contacto) {
-
+    function crearBotonBorrarContacto(contacto)
+    {
         //boton borrar
         let botonDanger = document.createElement('button');
         botonDanger.id = 'botonDanger' + contacto.fila;
@@ -24,15 +25,15 @@
         botonDanger.onclick = () => borrarContacto(contacto.fila);
 
         //icono
-        let iconoDager = document.createElement('i');
-        iconoDager.classList.add('bi', 'bi-trash');
-        botonDanger.appendChild(iconoDager);
+        let iconoDanger = document.createElement('i');
+        iconoDanger.classList.add('bi', 'bi-trash');
+        botonDanger.appendChild(iconoDanger);
 
         return botonDanger;
     }
 
-    function crearBotonModificarContacto(contacto) {
-
+    function crearBotonModificarContacto(contacto)
+    {
         //boton modificar
         let botonModificar = document.createElement('button');
         botonModificar.id = 'botonModificar' + contacto.fila;
@@ -46,5 +47,5 @@
 
         return botonModificar;
     }
-
+    
 </script>
