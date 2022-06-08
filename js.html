@@ -1,64 +1,57 @@
 <script>
-//////////////////////
-// CONSTANTES
-//////////////////////
+    //////////////////////
+    // CONSTANTES
+    //////////////////////
 
-const ICONO_CHECK = 'bi-check2-square';
-const ICONO_PAPELERA = 'bi-trash';
-const ICONO_CONTACTO = 'bi-person-plus-fill';
-const ICONO_ERROR = 'bi-bug';
-const ICONO_ADVERTENCIA = 'bi-exclamation-square';  
+    const ICONO_CHECK = 'bi-check2-square';
+    const ICONO_PAPELERA = 'bi-trash';
+    const ICONO_CONTACTO = 'bi-person-plus-fill';
+    const ICONO_ERROR = 'bi-bug';
+    const ICONO_ADVERTENCIA = 'bi-exclamation-square';
 
-const LOTTIE_CHECK = 'https://assets3.lottiefiles.com/private_files/lf30_dfspihm8.json';
-const LOTTIE_PAPELERA = 'https://assets8.lottiefiles.com/packages/lf20_WcyRdM.json';
-const LOTTIE_CONTACTO = 'https://assets1.lottiefiles.com/packages/lf20_sOjs8q/add_contact_05.json';
-const LOTTIE_ERROR = 'https://assets10.lottiefiles.com/packages/lf20_yw3nyrsv.json';
-const LOTTIE_PELIGRO = 'https://assets2.lottiefiles.com/packages/lf20_qbuxqwzg.json';
-const LOTTIE_LOADER_NUBE = 'https://assets8.lottiefiles.com/private_files/lf30_m5jf97io.json';
-const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20_x62chJ.json';
+    const LOTTIE_CHECK = 'https://assets3.lottiefiles.com/private_files/lf30_dfspihm8.json';
+    const LOTTIE_PAPELERA = 'https://assets8.lottiefiles.com/packages/lf20_WcyRdM.json';
+    const LOTTIE_CONTACTO = 'https://assets1.lottiefiles.com/packages/lf20_sOjs8q/add_contact_05.json';
+    const LOTTIE_ERROR = 'https://assets10.lottiefiles.com/packages/lf20_yw3nyrsv.json';
+    const LOTTIE_PELIGRO = 'https://assets2.lottiefiles.com/packages/lf20_qbuxqwzg.json';
+    const LOTTIE_LOADER_NUBE = 'https://assets8.lottiefiles.com/private_files/lf30_m5jf97io.json';
+    const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20_x62chJ.json';
 
-//////////////////////
-// EVENTOS
-//////////////////////
+    //////////////////////
+    // EVENTOS
+    //////////////////////
 
 
     //boton subir
-    window.addEventListener('scroll', function ()
-    {
-        if (this.window.scrollY > 500)
-        {
+    window.addEventListener('scroll', function () {
+        if (this.window.scrollY > 500) {
             document.getElementById('botonSubir').style.transform = "scale(1)";
         }
-        if (this.window.scrollY < 500)
-        {
+        if (this.window.scrollY < 500) {
             document.getElementById('botonSubir').style.transform = "scale(0)";
         }
     });
 
     //cargar imagen
-    document.getElementById('imagen').addEventListener("change", function()
-    {
+    document.getElementById('imagen').addEventListener("change", function () {
         document.getElementById('imgForm').src = URL.createObjectURL(this.files[0])
     });
 
     //dragover
-    document.getElementById('imgForm').addEventListener('dragover', function(event)
-    {
+    document.getElementById('imgForm').addEventListener('dragover', function (event) {
         event.preventDefault();
         this.style.filter = 'opacity(0%)';
         document.getElementById('lottieForm').style.display = 'flex';
     });
 
     //dragleave
-    document.getElementById('imgForm').addEventListener('dragleave', function(event)
-    {
+    document.getElementById('imgForm').addEventListener('dragleave', function (event) {
         this.style.filter = 'opacity(100%)';
         document.getElementById('lottieForm').style.display = 'none';
     });
 
     //drop
-    document.getElementById('imgForm').addEventListener('drop', function(event)
-    {
+    document.getElementById('imgForm').addEventListener('drop', function (event) {
         event.preventDefault();
 
         let ficheros = event.dataTransfer.files;
@@ -72,42 +65,36 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
         //mostramos la imagen y quitamos zona de carga
         this.style.filter = 'opacity(100%)';
         document.getElementById('lottieForm').style.display = 'none';
-        
+
     });
 
-    document.getElementById('copiarCorreo').addEventListener('click', function(event)
-    {        
-        copiarContenido(this, 'correoInfoContacto');        
+    document.getElementById('copiarCorreo').addEventListener('click', function (event) {
+        copiarContenido(this, 'correoInfoContacto');
     });
 
-    document.getElementById('copiarTelf').addEventListener('click', function(event)
-    {        
-        copiarContenido(this, 'telfInfoContacto');        
+    document.getElementById('copiarTelf').addEventListener('click', function (event) {
+        copiarContenido(this, 'telfInfoContacto');
     });
 
-    function copiarContenido(icono, id)
-    {
+    function copiarContenido(icono, id) {
         let texto = document.getElementById(id).textContent;
 
         navigator.clipboard.writeText(texto)
-        .then(() =>
-        {
-            icono.classList.remove('bi-clipboard');
-            icono.classList.add('bi-check-lg');
-            icono.title = 'Copiado';            
-            bootstrap.Tooltip.getOrCreateInstance(icono).show();
-            restaurarIcono(icono);
-        });
+            .then(() => {
+                icono.classList.remove('bi-clipboard');
+                icono.classList.add('bi-check-lg');
+                icono.title = 'Copiado';
+                bootstrap.Tooltip.getOrCreateInstance(icono).show();
+                restaurarIcono(icono);
+            });
     }
 
-    function restaurarIcono(icono)
-    {
-        setTimeout(function()
-        {
+    function restaurarIcono(icono) {
+        setTimeout(function () {
             icono.classList.remove('bi-check-lg');
             icono.classList.add('bi-clipboard');
             icono.title = '';
-            bootstrap.Tooltip.getInstance(icono).dispose(); 
+            bootstrap.Tooltip.getInstance(icono).dispose();
         }, 2000);
     }
 
@@ -119,23 +106,20 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
 
 
 
-    function subirArriba()
-    {
+    function subirArriba() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
 
-    function limpiar()
-    {
+    function limpiar() {
         eliminarTabla();
         eliminarTarjetas();
         crearLoaderLottie('divContactos', LOTTIE_LOADER_AVION_PAPEL);
     }
 
-    function mostrar()
-    {
+    function mostrar() {
         crearTarjetasContactos();
-        eliminarLoader();        
+        eliminarLoader();
     }
 
 
@@ -147,45 +131,40 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
 
 
     //INSERTAR CONTACTO
-    function insertarContacto()
-    {
-        limpiar();  
-        bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();      
+    function insertarContacto() {
+        limpiar();
+        bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
 
         let contacto = guardarDatosContacto();
         let archivo = document.getElementById('imagen').files[0];
 
-        if(archivo) subirImagenInsertar(contacto, archivo);
-        else
-        {
+        if (archivo) subirImagenInsertar(contacto, archivo);
+        else {
             google.script.run
-            .withSuccessHandler(contactoInsertadoCorrectamente)
-            .withFailureHandler(contactoInsertadoError)
-            .insertarContacto(contacto);
+                .withSuccessHandler(contactoInsertadoCorrectamente)
+                .withFailureHandler(contactoInsertadoError)
+                .insertarContacto(contacto);
         }
     }
 
-    function guardarDatosContacto()
-    {
+    function guardarDatosContacto() {
         let contacto =
         {
-            nombre      :   document.getElementById('nombre').value,
-            apellidos   :   document.getElementById('apellidos').value,
-            correo      :   document.getElementById('correo').value,
-            telf        :   document.getElementById('telf').value,
-            imagen      :   document.getElementById('imgForm').src
+            nombre: document.getElementById('nombre').value,
+            apellidos: document.getElementById('apellidos').value,
+            correo: document.getElementById('correo').value,
+            telf: document.getElementById('telf').value,
+            imagen: document.getElementById('imgForm').src
         };
         return contacto;
     }
 
-    function subirImagenInsertar(contacto, archivo)
-    {
+    function subirImagenInsertar(contacto, archivo) {
         let fr = new FileReader();
         fr.readAsArrayBuffer(archivo);
 
-        fr.onload = function()
-        {
-            let imagen = 
+        fr.onload = function () {
+            let imagen =
             {
                 nombre: archivo.name,
                 tipo: archivo.type,
@@ -196,11 +175,10 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
                 .withSuccessHandler(contactoInsertadoCorrectamente)
                 .withFailureHandler(contactoInsertadoError)
                 .insertarContacto(contacto, imagen);
-        }        
+        }
     }
 
-    function contactoInsertadoCorrectamente()
-    {
+    function contactoInsertadoCorrectamente() {
         //eliminamos los datos de los inputs
         document.getElementById('nombre').value = '';
         document.getElementById('correo').value = '';
@@ -211,17 +189,15 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
         mostrar();
     }
 
-    function contactoInsertadoError()
-    {
+    function contactoInsertadoError() {
         crearNotificacionError('No se ha podido insertar el contacto', 'ERROR');
         mostrar();
     }
-    
+
     //MODIFICAR CONTACTO
-    function modificarContacto(numFila)
-    {
+    function modificarContacto(numFila) {
         limpiar();
-        
+
         //cerrar modal
         bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).hide();
 
@@ -230,24 +206,21 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
 
         let archivo = document.getElementById('imagen').files[0];
 
-        if(archivo) subirImagenModificar(contacto, archivo);
-        else
-        {
+        if (archivo) subirImagenModificar(contacto, archivo);
+        else {
             google.script.run
-            .withSuccessHandler(contactoModificadoCorrectamente)
-            .withFailureHandler(contactoModificadoError)
-            .modificarContacto(contacto);           
-        }        
+                .withSuccessHandler(contactoModificadoCorrectamente)
+                .withFailureHandler(contactoModificadoError)
+                .modificarContacto(contacto);
+        }
     }
 
-    function subirImagenModificar(contacto, archivo)
-    {
+    function subirImagenModificar(contacto, archivo) {
         let fr = new FileReader();
         fr.readAsArrayBuffer(archivo);
 
-        fr.onload = function()
-        {
-            let imagen = 
+        fr.onload = function () {
+            let imagen =
             {
                 nombre: archivo.name,
                 tipo: archivo.type,
@@ -258,25 +231,22 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
                 .withSuccessHandler(contactoModificadoCorrectamente)
                 .withFailureHandler(contactoModificadoError)
                 .modificarContacto(contacto, imagen);
-        }        
+        }
     }
 
 
-    function contactoModificadoCorrectamente()
-    {
+    function contactoModificadoCorrectamente() {
         crearNotificacionContacto('Contacto modificado correctamente', 'MODIFICADO OK');
         mostrar();
     }
 
-    function contactoModificadoError()
-    {
+    function contactoModificadoError() {
         crearNotificacionError('No se ha podido modificar el contacto', 'ERROR');
         mostrar();
     }
 
     //BORRAR CONTACTO
-    function borrarContacto(numFila)
-    {
+    function borrarContacto(numFila) {
         limpiar();
 
         google.script.run
@@ -285,21 +255,18 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
             .borrarContacto(numFila);
     }
 
-    function contactoBorradoCorrectamente()
-    {
+    function contactoBorradoCorrectamente() {
         crearNotificacionBorrar('Contacto borrado correctamente', 'BORRADO OK');
         mostrar();
     }
 
-    function contactoBorradoError()
-    {
+    function contactoBorradoError() {
         crearNotificacionError('No se ha podido borrar el contacto', 'ERROR');
         mostrar();
     }
-   
+
     //IMPORTAR CONTACTO
-    function importarContactos()
-    {
+    function importarContactos() {
         limpiar();
 
         google.script.run
@@ -308,23 +275,26 @@ const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20
             .importarContactos();
     }
 
-    function contactosImportadosCorrectamente()
-    {
+    function contactosImportadosCorrectamente() {
         crearNotificacionOK('Se han agregado los contactos correctamente', 'OK');
         mostrar();
     }
 
-    function contactosImportadosError()
-    {
+    function contactosImportadosError() {
         crearNotificacionError('No se ha podido importar los contactos', 'ERROR');
         mostrar();
     }
 
     //habilitar popovers
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
-})
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
 
+    //habilitar popovers
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
 
 </script>
