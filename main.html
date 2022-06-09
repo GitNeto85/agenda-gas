@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Crear modificar contacto-->
     <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="tituloCrearContactoModal"
         aria-hidden="true">
         <div class="modal-lg modal-dialog">
@@ -71,7 +71,9 @@
 
                             <!--Parte de la derecha-->
                             <div class="div-img-form">
-                                <i class="icono-form bi bi-question-circle-fill btn" data-bs-toggle="popover" data-bs-cont="Se recomiendan imagenes cuadradas para una mejor visualización. De lo contrario parte de la imagen podrá ser recortada, resolución recomendada 320x320" data-bs-trigger="hover"></i>
+                                <i class="icono-form bi bi-question-circle-fill btn" data-bs-toggle="popover"
+                                    data-bs-cont="Se recomiendan imagenes cuadradas para una mejor visualización. De lo contrario parte de la imagen podrá ser recortada, resolución recomendada 320x320"
+                                    data-bs-trigger="hover"></i>
                                 <img class="img-fluid img-form" id="imgForm" alt="Image de contacto">
                                 <div class="lottie-form" id="lottieForm">
                                     <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_z7DhMX.json"
@@ -85,6 +87,40 @@
                         <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear contacto</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Info Contacto-->
+    <div class="modal fade" id="infoContactoModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="mb-3 d-flex justify-content-center align-items-center fles-column">
+
+                        <!--Parte superior-->
+                        <div class="m-3">
+                            <h3 class="text-uppercase text-center fw-bold mb-2" id="nombreInfoContacto"></h3>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <h5 class="me-4" id="correoInfoContacto"></h5>
+                                <i id="copiarCorreo" class="bi bi-clipboard boton-copiar" data-bs-toggle="tooltip" data-bs-placement="right" title="Copiar correo"></i>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <h5 class="me-4" id="telfInfoContacto"></h5>
+                                <i id="copiarTelf" class="bi bi-clipboard boton-copiar" data-bs-toggle="tooltip" data-bs-placement="right" title="Copiar teléfono"></i>
+                            </div>
+                        </div>
+                        <!--Parte inferior-->
+                        <div class="m-3">
+                            <img id="imgInfoContacto" class="border border-4 border-dark rounded" alt="Vistra previa de la imagen del contacto">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
