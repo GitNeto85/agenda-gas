@@ -1,23 +1,21 @@
 <script>
 
-    function crearTarjetasCuadradas()
-    {
+    function crearTarjetasCuadradas() {
         limpiar();
 
         google.script.run
             .withSuccessHandler(crearTarjetasCuadradasCorrectamente)
-            .withFailureHandler(crearTarjetasError)
+            .withFailureHandler(crearTarjetassError)
             .obtenerDatos();
-    }        
+    }
 
-    function crearTarjetasCuadradasCorrectamente(datos)
-    {
+    function crearTarjetasCuadradasCorrectamente(datos) {
         //extraer contactos
         let contactos = extraerContactos(datos);
 
         let tarjetas = document.createElement('div');
         tarjetas.id = 'tarjetasContactos';
-        tarjetas.classList.add('d-flex','justify-content-center','flex-wrap');
+        tarjetas.classList.add('d-flex', 'justify-content-center', 'flex-wrap');
 
         //por cada contacto, creamos la tarjeta
         //contactos.forEach(contacto => tarjetas.appendChild(crearContactoPlantilla(contacto)));
@@ -28,17 +26,16 @@
         document.getElementById('divContactos').appendChild(tarjetas);
 
         //eliminaremos el loader
-        eliminarLoader();  
+        eliminarLoader();
     }
 
-    function crearContactoHTMLEstilo1(contacto)
-    {
+    function crearContactoHTMLEstilo1(contacto) {
         return `
         <div id='tarjeta${contacto.fila}' class='caja-estilo-1 my-5 mx-2'>
             <div class='caja-contacto'>
                 <img src='${contacto.imagen}' alt='Imagen del contacto'>
                 <div class='datos-contacto'>
-                    <h3>${contacto.nombre+' '+contacto.apellidos}</h3>
+                    <h3>${contacto.nombre + ' ' + contacto.apellidos}</h3>
                     <span>
                         <a onclick='abrirModalInfoContacto(${JSON.stringify(contacto)})' class='boton-caja btn btn-success'><i class='bi bi-plus-square'></i></a>
                         <a onclick='abrirModalModificarContacto(${JSON.stringify(contacto)})' class='boton-caja btn btn-warning'><i class='bi bi-pencil-square'></i></a>
@@ -48,14 +45,13 @@
             </div>
         </div>`;
     }
-    function crearContactoHTMLEstilo2(contacto)
-    {
+    function crearContactoHTMLEstilo2(contacto) {
         return `
         <div id='tarjeta${contacto.fila}' class='caja-estilo-2 m-2'>
             <div class='caja-contacto'>
                 <img src='${contacto.imagen}' alt='Imagen del contacto'>
                 <div class='datos-contacto'>
-                    <h3>${contacto.nombre+' '+contacto.apellidos}</h3>
+                    <h3>${contacto.nombre + ' ' + contacto.apellidos}</h3>
                     <span>
                         <a onclick='abrirModalInfoContacto(${JSON.stringify(contacto)})' class='boton-caja btn btn-success'><i class='bi bi-plus-square'></i></a>
                         <a onclick='abrirModalModificarContacto(${JSON.stringify(contacto)})' class='boton-caja btn btn-warning'><i class='bi bi-pencil-square'></i></a>
@@ -65,14 +61,13 @@
             </div>
         </div>`;
     }
-    function crearContactoHTMLEstilo3(contacto)
-    {
+    function crearContactoHTMLEstilo3(contacto) {
         return `
         <div id='tarjeta${contacto.fila}' class='caja-estilo-3 m-2'>
             <div class='caja-contacto'>
                 <img src='${contacto.imagen}' alt='Imagen del contacto'>
                 <div class='datos-contacto'>
-                    <h3>${contacto.nombre+' '+contacto.apellidos}</h3>
+                    <h3>${contacto.nombre + ' ' + contacto.apellidos}</h3>
                     <span class='d-flex flex-column m-2'>
                         <a onclick='abrirModalInfoContacto(${JSON.stringify(contacto)})' class='m-1 boton-caja btn btn-success'><i class='bi bi-plus-square'></i></a>
                         <a onclick='abrirModalModificarContacto(${JSON.stringify(contacto)})' class='m-1 boton-caja btn btn-warning'><i class='bi bi-pencil-square'></i></a>
@@ -82,14 +77,13 @@
             </div>
         </div>`;
     }
-    function crearContactoHTMLEstilo4(contacto)
-    {
+    function crearContactoHTMLEstilo4(contacto) {
         return `
         <div id='tarjeta${contacto.fila}' class='caja-estilo-4 m-4'>
             <div class='caja-contacto'>
                 <img src='${contacto.imagen}' alt='Imagen del contacto'>
                 <div class='datos-contacto'>
-                    <h3>${contacto.nombre+' '+contacto.apellidos}</h3>
+                    <h3>${contacto.nombre + ' ' + contacto.apellidos}</h3>
                     <span>
                         <a onclick='abrirModalInfoContacto(${JSON.stringify(contacto)})' class='border border-2 border-white boton-caja btn btn-success'><i class='bi bi-plus-square'></i></a>
                         <a onclick='abrirModalModificarContacto(${JSON.stringify(contacto)})' class='border border-2 border-white boton-caja btn btn-warning'><i class='bi bi-pencil-square'></i></a>
@@ -99,14 +93,13 @@
             </div>
         </div>`;
     }
-    function crearContactoHTMLEstilo5(contacto)
-    {
+    function crearContactoHTMLEstilo5(contacto) {
         return `
         <div id='tarjeta${contacto.fila}' class='caja-estilo-5 m-2'>
             <div class='caja-contacto'>
                 <img src='${contacto.imagen}' alt='Imagen del contacto'>
                 <div class='datos-contacto'>
-                    <h3>${contacto.nombre+' '+contacto.apellidos}</h3>
+                    <h3>${contacto.nombre + ' ' + contacto.apellidos}</h3>
                     <span>
                         <a onclick='abrirModalInfoContacto(${JSON.stringify(contacto)})' class='border border-2 border-dark boton-caja btn btn-success'><i class='bi bi-plus-square'></i></a>
                         <a onclick='abrirModalModificarContacto(${JSON.stringify(contacto)})' class='border border-2 border-dark boton-caja btn btn-warning'><i class='bi bi-pencil-square'></i></a>
@@ -118,13 +111,12 @@
     }
 
 
-    function crearContactoPlantilla(contacto)
-    {
+    function crearContactoPlantilla(contacto) {
         let plantilla = document.getElementById('plantillaContacto');
         let copia = document.importNode(plantilla.content, true);
 
-        copia.getElementById('plantillaNumero').id = 'tarjeta'+contacto.fila;
-        copia.getElementById('plantillaNombre').textContent = contacto.nombre+' '+contacto.apellidos;
+        copia.getElementById('plantillaNumero').id = 'tarjeta' + contacto.fila;
+        copia.getElementById('plantillaNombre').textContent = contacto.nombre + ' ' + contacto.apellidos;
         copia.getElementById('plantillaImagen').src = contacto.imagen;
 
         //botones
@@ -133,13 +125,12 @@
         copia.getElementById('plantillaBorrar').onclick = () => borrarContacto(contacto.fila);
 
         let loader = copia.getElementById('plantillaLoader');
-        let tarjeta = copia.getElementById('tarjeta'+contacto.fila);
+        let tarjeta = copia.getElementById('tarjeta' + contacto.fila);
 
         tarjeta.style.display = 'none';
 
         //evento finalización carga de la imagen
-        copia.getElementById('plantillaImagen').onload = () =>
-        {
+        copia.getElementById('plantillaImagen').onload = () => {
             loader.remove();
             tarjeta.style.display = 'inline';
         }
