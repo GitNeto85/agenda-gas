@@ -1,18 +1,23 @@
 <script>
 
     //inicio
-    window.addEventListener('load', function() {
-        mostrar();
+    window.addEventListener('load', function () {
+        crearTarjetas();
     });
 
     //insertar contacto
-    document.getElementById('insertarContacto').addEventListener('click', function() {
-       Contacto.nuevo();
+    document.getElementById('insertarContacto').addEventListener('click', function () {
+        Contacto.nuevo();
+    });
+
+    //importar contactos
+    document.getElementById("insetarContacto").addEventListener('click', function () {
+        importarComtacto();
     });
 
     //eventos de botones mostrar contactos
     document.getElementById('tarjetasEstilo1').addEventListener('click', function (event) {
-        Contacto.aplicarEstilo(Contacto.ESTILO_1);
+        //Contacto.aplicarEstilo(Contacto.ESTILO_1);
     });
     document.getElementById('tarjetasEstilo2').addEventListener('click', function (event) {
         Contacto.aplicarEstilo(Contacto.ESTILO_2);
@@ -36,6 +41,11 @@
         if (this.window.scrollY < 500) {
             document.getElementById('botonSubir').style.transform = "scale(0)";
         }
+    });
+
+    document.getElementById('botonSubir').addEventListener('click', function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     });
 
     //cargar imagen

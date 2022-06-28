@@ -4,13 +4,14 @@
         <button id="insertarContacto" type="button" class="btn btn-primary m-2">
             <i class="bi bi-person-plus"></i>
         </button>
-        <button type="button" class="btn btn-warning m-2" onclick="importarContactos()"> + 5</button>
+
+        <button id="imprtarContacto" type="button" class="btn btn-warning m-2"> + 5</button>
 
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="desplegableEstilos" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-gear fs-5"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="desplegableEstilos">
+            <ul id="listaEstilos" class="dropdown-menu dropdown-menu-dark" aria-labelledby="desplegableEstilos">
               <li><a class="dropdown-item" id="tarjetasEstilo1"></a>Estilo tarjeta 1</li>
               <li><a class="dropdown-item" id="tarjetasEstilo2"></a>Estilo tarjeta 2</li>
               <li><a class="dropdown-item" id="tarjetasEstilo3"></a>Estilo tarjeta 3</li>
@@ -40,7 +41,7 @@
                     <h5 class="modal-title" id="tituloModal">Nuevo contacto</h5>
                 </div>
                 <!--Formulario crear contacto-->
-                <form onsubmit="insertarContacto()" method="dialog" id="formulario">
+                <form method="dialog" id="formulario">
                     <div class="modal-body">
                         <div class="mb-3 d-flex justify-content-center align-items-center fles-wrap">
                             <!--Parte de la izquierda-->
